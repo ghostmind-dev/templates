@@ -1,0 +1,16 @@
+services:
+  templates_state:
+    container_name: templates-state
+    build:
+      context: ${SRC}/templates/state/app
+      dockerfile: ${SRC}/templates/state/docker/Dockerfile
+    restart: always
+    env_file:
+      - ${SRC}/templates/state/.env.local
+    environment:
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
+      HASURA_GRAPHQL_SERVER_PORT: ${PORT}
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
+
+    ports:
+      - ${PORT}:${PORT}
