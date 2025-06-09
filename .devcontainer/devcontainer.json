@@ -37,6 +37,9 @@
     "--network=host",
     "--name=templates"
   ],
+  "forwardPorts": [
+    5080
+  ],
   "customizations": {
     "vscode": {
       "extensions": [

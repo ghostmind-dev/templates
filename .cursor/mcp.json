@@ -1,0 +1,16 @@
+{
+    "mcpServers": {
+        "db-query": {
+            "command": "/workspaces/templates/dev/run/bin/cmd.ts",
+            "args": [
+                "misc",
+                "mcp",
+                "npx",
+                "mcp-graphql",
+                "--env",
+                "/workspaces/templates/templates/state/.env.mcp"
+            ],
+            "env": {}
+        }
+    }
+}
