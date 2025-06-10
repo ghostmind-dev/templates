@@ -76,3 +76,11 @@ The `templates` table has the following structure:
 ### Comparison Operators
 - String fields support: `_eq`, `_gt`, `_gte`, `_ilike`, `_in`, `_iregex`, `_like`, `_lt`, `_lte`, `_neq`, `_nilike`, `_nin`, `_niregex`, `_nlike`, `_nregex`, `_nsimilar`, `_regex`, `_similar`
 - Integer fields support: `_eq`, `_gt`, `_gte`, `_in`, `_is_null`, `_lt`, `_lte`, `_neq`, `_nin`
+
+## Latest Subject Added
+
+Okay, this is the new subject that has been added to the database:
+
+- **ID**: 1
+- **Name**: bolean
+- **Source**: the singwer
