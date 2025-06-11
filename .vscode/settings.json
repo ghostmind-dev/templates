@@ -43,6 +43,13 @@
       "format": "svg"
     },
     {
+      "icon": "bloc",
+      "extensions": [
+        ".cursor"
+      ],
+      "format": "svg"
+    },
+    {
       "icon": "log",
       "extensions": [
         "scripts"

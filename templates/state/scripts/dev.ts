@@ -1,9 +1,9 @@
 import type { CustomArgs, CustomOptions } from 'jsr:@ghostmind/run';
 import { dockerComposeBuild, dockerComposeUp } from 'jsr:@ghostmind/run';
-import { $, cd, within } from 'npm:zx';
+import { $å } from 'npm:zx';
 
 export default async function (_args: CustomArgs, opts: CustomOptions) {
-  const { run, start, currentPath } = opts;
+  const { run, start } = opts;
 
   await start({
     build: {

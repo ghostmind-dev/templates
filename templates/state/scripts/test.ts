@@ -1,5 +1,4 @@
 import type { CustomArgs, CustomOptions } from 'jsr:@ghostmind/run';
-import { $, sleep } from 'npm:zx@8.1.3';
 import { gql, GraphQLClient } from 'npm:graphql-request@7.1.0';
 
 export default async function (_arg: CustomArgs, opts: CustomOptions) {

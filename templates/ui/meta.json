@@ -1,0 +1,38 @@
+{
+  "id": "v8XgSDVvzD90",
+  "name": "ui",
+  "description": "Next.js UI with Auth",
+  "custom": {
+    "root": "scripts"
+  },
+  "docker": {
+    "default": {
+      "root": "docker",
+      "image": "gcr.io/ghostmind-core/templates-ui",
+      "env_based": false,
+      "context_dir": "app"
+    }
+  },
+  "compose": {
+    "default": {
+      "root": "local"
+    }
+  },
+  "terraform": {
+    "core": {
+      "path": "infra",
+      "global": false,
+      "containers": ["default"]
+    }
+  },
+  "tunnel": {
+    "default": {
+      "hostname": "templates-ui.ghostmind.app",
+      "service": "http://localhost:5001"
+    }
+  },
+  "routines": {
+    "dev": "run custom dev build up",
+    "activate": "run action local ui -W --no-reuse"
+  }
+}
