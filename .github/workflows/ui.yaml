@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'templates/ui/**'
+      - 'templates/app/ui/**'
       - '.github/workflows/ui.yaml'
 env:
   SRC: ${{github.workspace}}
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{env.SRC}}/templates/ui
+        working-directory: ${{env.SRC}}/templates/app/ui
     steps:
       - name: run git safe.directory
         if: ${{ github.event.inputs.LOCAL == 'true' }}
@@ -50,6 +50,6 @@ jobs:
       - name: 'set directory secrets'
         uses: ghostmind-dev/play/actions/secrets@main
         with:
-          dir: ${{ github.workspace }}/templates/ui
+          dir: ${{ github.workspace }}/templates/app/ui
       - name: 'deploy app'
         run: run custom init --all
