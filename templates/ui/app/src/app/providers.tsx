@@ -40,60 +40,60 @@ export const NextAuthProvider = ({ children }: Props) => {
 // URQL
 ///////////////////////////////////////////////////////////////////////////////////////
 
-export const UrlqProvider = ({ children, publicEnvVar }: UrlqProviderProps) => {
-  const endpointWS = publicEnvVar.NEXT_PUBLIC_DB_POTION_ENDPOINT_WS;
-  const endpointHTTPS = publicEnvVar.NEXT_PUBLIC_DB_POTION_ENDPOINT_HTTP;
-  const [token, setToken] = useState('');
+// export const UrlqProvider = ({ children, publicEnvVar }: UrlqProviderProps) => {
+//   const endpointWS = publicEnvVar.NEXT_PUBLIC_DB_POTION_ENDPOINT_WS;
+//   const endpointHTTPS = publicEnvVar.NEXT_PUBLIC_DB_POTION_ENDPOINT_HTTP;
+//   const [token, setToken] = useState('');
 
-  useEffect(() => {
-    async function getToken() {
-      const res = await fetch('/api/hasura');
-      const tokenGenerated = await res.json();
+//   useEffect(() => {
+//     async function getToken() {
+//       const res = await fetch('/api/hasura');
+//       const tokenGenerated = await res.json();
 
-      setToken(tokenGenerated.hasura_token);
-    }
-    getToken();
-  }, []);
+//       setToken(tokenGenerated.hasura_token);
+//     }
+//     getToken();
+//   }, []);
 
-  const secret = `Bearer ${token}`;
+//   const secret = `Bearer ${token}`;
 
-  // Setup WebSocket Client for Subscriptions
-  const wsClient = createWSClient({
-    url: endpointWS || '',
-    connectionParams: () => {
-      return {
-        headers: { authorization: secret ? `${secret}` : '' },
-      };
-    },
-  });
+//   // Setup WebSocket Client for Subscriptions
+//   const wsClient = createWSClient({
+//     url: endpointWS || '',
+//     connectionParams: () => {
+//       return {
+//         headers: { authorization: secret ? `${secret}` : '' },
+//       };
+//     },
+//   });
 
-  // Setup URQL Client for Queries and Mutations
-  const client = new Client({
-    url: endpointHTTPS || '',
-    fetchOptions: () => {
-      return {
-        headers: { authorization: secret ? `${secret}` : '' },
-      };
-    },
-    exchanges: [
-      cacheExchange,
-      fetchExchange,
-      subscriptionExchange({
-        forwardSubscription(request) {
-          const input = { ...request, query: request.query || '' };
-          return {
-            subscribe(sink) {
-              const unsubscribe = wsClient.subscribe(input, sink);
-              return { unsubscribe };
-            },
-          };
-        },
-      }),
-    ],
-  });
+//   // Setup URQL Client for Queries and Mutations
+//   const client = new Client({
+//     url: endpointHTTPS || '',
+//     fetchOptions: () => {
+//       return {
+//         headers: { authorization: secret ? `${secret}` : '' },
+//       };
+//     },
+//     exchanges: [
+//       cacheExchange,
+//       fetchExchange,
+//       subscriptionExchange({
+//         forwardSubscription(request) {
+//           const input = { ...request, query: request.query || '' };
+//           return {
+//             subscribe(sink) {
+//               const unsubscribe = wsClient.subscribe(input, sink);
+//               return { unsubscribe };
+//             },
+//           };
+//         },
+//       }),
+//     ],
+//   });
 
-  return <Provider value={client}>{children}</Provider>;
-};
+//   return <Provider value={client}>{children}</Provider>;
+// };
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // THE END

@@ -19,18 +19,18 @@ export default async function Main() {
     redirect('/signin');
   }
 
-  let publicEnvVar = {
-    NEXT_PUBLIC_DB_POTION_ENDPOINT_WS:
-      process.env.NEXT_PUBLIC_DB_POTION_ENDPOINT_WS,
-    NEXT_PUBLIC_DB_POTION_ENDPOINT_HTTP:
-      process.env.NEXT_PUBLIC_DB_POTION_ENDPOINT_HTTP,
-  };
+  // let publicEnvVar = {
+  //   NEXT_PUBLIC_DB_POTION_ENDPOINT_WS:
+  //     process.env.NEXT_PUBLIC_DB_POTION_ENDPOINT_WS,
+  //   NEXT_PUBLIC_DB_POTION_ENDPOINT_HTTP:
+  //     process.env.NEXT_PUBLIC_DB_POTION_ENDPOINT_HTTP,
+  // };
 
   return (
-    <UrlqProvider publicEnvVar={publicEnvVar}>
-      <Home
-        userEmail={userEmail}
-      />
-    </UrlqProvider>
+
+    <Home
+      userEmail={userEmail}
+    />
+    // </UrlqProvider>
   );
 }
