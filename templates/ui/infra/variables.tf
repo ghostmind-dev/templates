@@ -6,6 +6,7 @@ variable "GOOGLE_OAUTH_CLIENT_ID" {}
 variable "GOOGLE_OAUTH_CLIENT_SECRET" {}
 variable "NEXTAUTH_URL" {}
 variable "NEXTAUTH_SECRET" {}
+variable "AUTH_TRUST_HOST" {}
 variable "DB_USERS_ENDPOINT" {}
 variable "DB_USERS_SECRET" {}
 variable "DB_POTION_ENDPOINT" {}
@@ -41,6 +42,10 @@ locals {
     {
       name  = "NEXTAUTH_SECRET"
       value = var.NEXTAUTH_SECRET
+    },
+    {
+      name  = "AUTH_TRUST_HOST"
+      value = var.AUTH_TRUST_HOST
     },
     {
       name  = "DB_USERS_ENDPOINT"
