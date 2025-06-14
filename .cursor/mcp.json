@@ -8,7 +8,7 @@
                 "npx",
                 "mcp-graphql",
                 "--env",
-                "/workspaces/templates/templates/state/.env.mcp"
+                "/workspaces/templates/templates/app-hasura-db/.env.mcp"
             ],
             "env": {}
         }
