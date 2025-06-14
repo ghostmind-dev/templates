@@ -1,6 +1,7 @@
 {
   "id": "lWatCfm3C45R",
-  "name": "state",
+  "name": "app-hasura-db",
+  "type": "template",
   "terraform": {
     "core": {
       "path": "run",
@@ -27,5 +28,10 @@
     "dev": "run custom dev buld up",
     "console": "run custom dev console",
     "activate": "run action local state -W --no-reuse"
-  }
+  },
+  "tags": [
+    "app",
+    "hasura",
+    "db"
+  ]
 }

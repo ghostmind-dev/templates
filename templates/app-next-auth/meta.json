@@ -1,6 +1,6 @@
 {
   "id": "v8XgSDVvzD90",
-  "name": "ui",
+  "name": "app-next-auth",
   "description": "Next.js UI with Auth",
   "custom": {
     "root": "scripts"
@@ -22,7 +22,9 @@
     "core": {
       "path": "infra",
       "global": false,
-      "containers": ["default"]
+      "containers": [
+        "default"
+      ]
     }
   },
   "tunnel": {
@@ -34,5 +36,9 @@
   "routines": {
     "dev": "run custom dev build up",
     "activate": "run action local ui -W --no-reuse"
-  }
+  },
+  "tags": [
+    "app",
+    "next-auth"
+  ]
 }
