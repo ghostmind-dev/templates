@@ -20,7 +20,17 @@
     "default": {
       "path": "infra",
       "global": false,
-      "containers": ["default"]
+      "containers": [
+        "default"
+      ]
+    }
+  },
+  "mcp": {
+    "from_mcp_stream": {
+      "url": "${SERVER_URL}",
+      "headers": {
+        "Authorization": "${SERVER_TOKEN}"
+      }
     }
   }
 }

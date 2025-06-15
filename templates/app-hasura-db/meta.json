@@ -6,7 +6,9 @@
     "core": {
       "path": "run",
       "global": false,
-      "containers": ["default"]
+      "containers": [
+        "default"
+      ]
     }
   },
   "docker": {
@@ -27,5 +29,25 @@
     "console": "run custom dev console",
     "activate": "run action local state -W --no-reuse"
   },
-  "tags": ["app", "hasura", "db"]
+  "mcp": {
+    "question-database": {
+      "command": "npx",
+      "args": [
+        "mcp-graphql"
+      ],
+      "env": {
+        "ENDPOINT": "${HASURA_GRAPHQL_ENDPOINT}/v1/graphql",
+        "HEADERS": {
+          "content-type": "application/json",
+          "x-hasura-admin-secret": "${HASURA_GRAPHQL_ADMIN_SECRET}"
+        },
+        "ALLOW_MUTATIONS": "false"
+      }
+    }
+  },
+  "tags": [
+    "app",
+    "hasura",
+    "db"
+  ]
 }
