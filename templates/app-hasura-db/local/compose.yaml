@@ -7,10 +7,11 @@ services:
     restart: always
     env_file:
       - ${SRC}/templates/app-hasura-db/.env.local
+      - ${SRC}/templates/app-hasura-db/.env.base
     environment:
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       HASURA_GRAPHQL_SERVER_PORT: ${PORT}
-      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
 
     ports:
       - ${PORT}:${PORT}

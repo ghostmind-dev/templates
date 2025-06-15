@@ -110,6 +110,13 @@
     {
       "icon": "config",
       "extensions": [
+        ".env.base"
+      ],
+      "format": "svg"
+    },
+    {
+      "icon": "config",
+      "extensions": [
         ".env.mcp"
       ],
       "format": "svg"

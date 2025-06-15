@@ -1,20 +1,20 @@
-import type { CustomArgs, CustomOptions } from "jsr:@ghostmind/run";
-import { $ } from "npm:zx@8.1.3";
+import type { CustomArgs, CustomOptions } from 'jsr:@ghostmind/run';
+import { $ } from 'npm:zx@8.1.3';
 
 export default async function (_arg: CustomArgs, opts: CustomOptions) {
   $.verbose = true;
 
-  const PGHOST = Deno.env.get("PGHOST");
-  const PGUSER = Deno.env.get("PGUSER");
-  const PGPASSWORD = Deno.env.get("PGPASSWORD");
-  const PGPORT = Deno.env.get("PGPORT") || "5432";
-  const DB_NAME = Deno.env.get("DB_NAME") || "my_new_db";
+  const PGHOST = Deno.env.get('PGHOST');
+  const PGUSER = Deno.env.get('PGUSER');
+  const PGPASSWORD = Deno.env.get('PGPASSWORD');
+  const PGPORT = Deno.env.get('PGPORT') || '5432';
+  const DB_NAME = Deno.env.get('DB_NAME') || 'my_new_db';
 
   const dbName = _arg[0] || DB_NAME;
 
   if (!PGHOST || !PGUSER || !PGPASSWORD) {
     throw new Error(
-      "PGHOST, PGUSER, and PGPASSWORD must be set in the environment"
+      'PGHOST, PGUSER, and PGPASSWORD must be set in the environment'
     );
   }
 
@@ -22,7 +22,7 @@ export default async function (_arg: CustomArgs, opts: CustomOptions) {
   const checkResult =
     await $`PGPASSWORD=${PGPASSWORD} psql -h ${PGHOST} -U ${PGUSER} -p ${PGPORT} -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname='${dbName}'" --set=sslmode=require`;
 
-  if (checkResult.stdout.trim() === "1") {
+  if (checkResult.stdout.trim() === '1') {
     console.log(`Database '${dbName}' already exists.`);
     return;
   }

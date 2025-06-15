@@ -5,11 +5,15 @@ provider "google" {
 
 
 resource "google_cloud_run_v2_service" "default" {
-  name     = "${var.PROJECT}-${var.ENVIRONMENT}-${var.APP}"
-  location = "us-central1"
+  name                = "${var.PROJECT}-${var.ENVIRONMENT}-${var.APP}"
+  location            = "us-central1"
+  deletion_protection = false
+
+
 
   template {
     timeout = "900s"
+
 
     scaling {
       min_instance_count = 0

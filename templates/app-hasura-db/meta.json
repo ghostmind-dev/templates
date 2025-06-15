@@ -27,7 +27,7 @@
   "routines": {
     "dev": "run custom dev build up",
     "console": "run custom dev console",
-    "activate": "run action local state -W --no-reuse"
+    "activate": "run action local ${APP} -W --no-reuse"
   },
   "mcp": {
     "question-database": {
@@ -56,5 +56,8 @@
     "init": [
       "run custom start"
     ]
+  },
+  "secrets": {
+    "base": "base"
   }
 }

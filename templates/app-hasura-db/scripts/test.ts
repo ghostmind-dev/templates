@@ -2,11 +2,11 @@ import type { CustomArgs, CustomOptions } from 'jsr:@ghostmind/run';
 import { gql, GraphQLClient } from 'npm:graphql-request@7.1.0';
 
 export default async function (_arg: CustomArgs, opts: CustomOptions) {
-  const endpoint_login = Deno.env.get('DB_POTION_ENDPOINT') as string;
+  const endpoint_login = Deno.env.get('HASURA_GRAPHQL_ENDPOINT') as string;
 
-  const endpoint_secret = Deno.env.get('DB_POTION_SECRET') as string;
+  const endpoint_secret = Deno.env.get('HASURA_GRAPHQL_ADMIN_SECRET') as string;
 
-  const graphQLClient = new GraphQLClient(endpoint_login, {
+  const graphQLClient = new GraphQLClient(`${endpoint_login}/v1/graphql`, {
     headers: {
       'X-Hasura-Admin-Secret': endpoint_secret,
     },
@@ -14,9 +14,7 @@ export default async function (_arg: CustomArgs, opts: CustomOptions) {
 
   const sendRequest = gql`
     query MyQuery {
-      articles(limit: 1) {
-        id
-      }
+      __typename ## Placeholder value
     }
   `;
 
