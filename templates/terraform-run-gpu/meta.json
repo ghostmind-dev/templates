@@ -1,5 +1,15 @@
 {
   "id": "SmWJTKQBHCVJ",
   "name": "terraform-run-gpu",
-  "type": "config"
+  "type": "template",
+  "template": {
+    "ignoreFiles": [
+      "temp.txt",
+      "debug.log"
+    ],
+    "ignoreFolders": [
+      "tmp",
+      "logs"
+    ]
+  }
 }
