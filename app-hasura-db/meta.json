@@ -52,7 +52,6 @@
   ],
   "template": {
     "ignoreFolders": [],
-    "ignoreFiles": [],
     "init": [
       "run custom start"
     ]
