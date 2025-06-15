@@ -53,7 +53,7 @@
   "template": {
     "ignoreFolders": [],
     "init": [
-      "echo 40"
+      "run custom start"
     ]
   }
 }
