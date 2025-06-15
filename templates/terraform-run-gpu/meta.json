@@ -4,12 +4,7 @@
   "type": "template",
   "template": {
     "ignoreFiles": [
-      "temp.txt",
-      "debug.log"
-    ],
-    "ignoreFolders": [
-      "tmp",
-      "logs"
+      "meta.json"
     ]
   }
 }
