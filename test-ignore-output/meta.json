@@ -2,6 +2,16 @@
   "id": "8Ye2KLHFyNF1",
   "name": "mcp-stream",
   "type": "template",
+  "template": {
+    "ignoreFiles": [
+      "README.md",
+      ".gitignore"
+    ],
+    "ignoreFolders": [
+      "node_modules",
+      ".git"
+    ]
+  },
   "docker": {
     "default": {
       "root": "docker",

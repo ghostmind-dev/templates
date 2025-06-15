@@ -5,6 +5,9 @@
   "template": {
     "ignoreFiles": [
       "meta.json"
+    ],
+    "ignoreFolders": [
+      "docker"
     ]
   }
 }

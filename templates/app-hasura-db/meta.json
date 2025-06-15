@@ -51,8 +51,9 @@
     "db"
   ],
   "template": {
-    "ignoreFolders": [
-      "docker"
+    "ignoreFolders": [],
+    "init": [
+      "echo 40"
     ]
   }
 }
