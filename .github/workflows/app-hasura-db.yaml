@@ -1,23 +1,17 @@
-name: state
+name: app-hasura-db
 on:
   workflow_dispatch:
-  push:
-    branches:
-      # - main
-    paths:
-      - 'templates/app/state/**'
-      - '.github/workflows/state.yaml'
 env:
   SRC: ${{github.workspace}}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
   VAULT_ROOT_TOKEN: ${{ secrets.VAULT_ROOT_TOKEN }}
   VAULT_ADDR: ${{ secrets.VAULT_ADDR}}
 jobs:
-  state:
+  app-hasura-db:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{env.SRC}}/templates/app/state
+        working-directory: ${{env.SRC}}/templates/app-hasura-db
     steps:
       - name: run git safe.directory
         if: ${{ github.event.inputs.LOCAL == 'true' }}
@@ -52,7 +46,6 @@ jobs:
       - name: 'set directory secrets'
         uses: ghostmind-dev/play/actions/secrets@main
         with:
-          dir: ${{ github.workspace }}/templates/app/state
-      - run: echo ${{ secrets.TESTING_EXPAND }}
+          dir: ${{ github.workspace }}
       - name: 'deploy app'
         run: run custom init --all

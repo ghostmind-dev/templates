@@ -1,30 +1,28 @@
 # variables.tf
 
-variable "ENVIRONMENT" {}
+variable "APP" {}
 variable "PORT" {}
 variable "PGHOST" {}
 variable "PGUSER" {}
 variable "PGPASSWORD" {}
-variable "HASURA_GRAPHQL_ENDPOINT" {}
+variable "DB_NAME" {}
 variable "HASURA_GRAPHQL_JWT_SECRET" {}
 variable "HASURA_GRAPHQL_METADATA_DATABASE_URL" {}
 variable "HASURA_GRAPHQL_DATABASE_URL" {}
 variable "HASURA_GRAPHQL_ADMIN_SECRET" {}
-variable "DB_POTION_ENDPOINT" {}
-variable "DB_POTION_SECRET" {}
-variable "RELAY_API_ENDPOINT" {}
-variable "RELAY_API_SECRET" {}
+variable "CLOUD_RUN_URL_BASE" {}
+variable "ENVIRONMENT" {}
+variable "HASURA_GRAPHQL_ENDPOINT" {}
 variable "IMAGE_DIGEST_DEFAULT" {}
 variable "PROJECT" {}
-variable "APP" {}
 variable "GCP_PROJECT_ID" {}
 
 
 locals {
   env_vars = [
     {
-      name  = "ENVIRONMENT"
-      value = var.ENVIRONMENT
+      name  = "APP"
+      value = var.APP
     },
     {
       name  = "PGHOST"
@@ -39,8 +37,8 @@ locals {
       value = var.PGPASSWORD
     },
     {
-      name  = "HASURA_GRAPHQL_ENDPOINT"
-      value = var.HASURA_GRAPHQL_ENDPOINT
+      name  = "DB_NAME"
+      value = var.DB_NAME
     },
     {
       name  = "HASURA_GRAPHQL_JWT_SECRET"
@@ -59,20 +57,16 @@ locals {
       value = var.HASURA_GRAPHQL_ADMIN_SECRET
     },
     {
-      name  = "DB_POTION_ENDPOINT"
-      value = var.DB_POTION_ENDPOINT
+      name  = "CLOUD_RUN_URL_BASE"
+      value = var.CLOUD_RUN_URL_BASE
     },
     {
-      name  = "DB_POTION_SECRET"
-      value = var.DB_POTION_SECRET
+      name  = "ENVIRONMENT"
+      value = var.ENVIRONMENT
     },
     {
-      name  = "RELAY_API_ENDPOINT"
-      value = var.RELAY_API_ENDPOINT
-    },
-    {
-      name  = "RELAY_API_SECRET"
-      value = var.RELAY_API_SECRET
+      name  = "HASURA_GRAPHQL_ENDPOINT"
+      value = var.HASURA_GRAPHQL_ENDPOINT
     },
     {
       name  = "IMAGE_DIGEST_DEFAULT"
@@ -83,14 +77,10 @@ locals {
       value = var.PROJECT
     },
     {
-      name  = "APP"
-      value = var.APP
-    },
-    {
       name  = "GCP_PROJECT_ID"
       value = var.GCP_PROJECT_ID
     }
   ]
 }
 
-
+  

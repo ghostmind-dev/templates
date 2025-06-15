@@ -1,12 +1,6 @@
 name: ui
 on:
   workflow_dispatch:
-  push:
-    branches:
-      # - main
-    paths:
-      - 'templates/app/ui/**'
-      - '.github/workflows/ui.yaml'
 env:
   SRC: ${{github.workspace}}
   GH_TOKEN: ${{ secrets.GH_TOKEN }}
