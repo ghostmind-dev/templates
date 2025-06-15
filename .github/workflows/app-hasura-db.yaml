@@ -46,6 +46,6 @@ jobs:
       - name: 'set directory secrets'
         uses: ghostmind-dev/play/actions/secrets@main
         with:
-          dir: ${{ github.workspace }}
+          dir: ${{ github.workspace }}/templates/app-hasura-db
       - name: 'deploy app'
         run: run custom init --all
