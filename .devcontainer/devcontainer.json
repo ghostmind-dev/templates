@@ -30,6 +30,7 @@
     "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
     "source=ghostmind-templates-history,target=/commandhistory,type=volume",
     "source=${env:HOME}${env:USERPROFILE}/projects/container/templates,target=/Users/francoisseguin/projects/container/templates,type=bind",
+    "source=${env:HOME}${env:USERPROFILE}/projects/container/templates/.cursor,target=/Users/francoisseguin/projects/container/templates/.cursor,type=bind",
     "source=${env:HOME}${env:USERPROFILE}/projects/mcp,target=/Users/francoisseguin/projects/mcp,type=bind",
     "source=${env:HOME}${env:USERPROFILE}/.cursor,target=/home/vscode/.cursor,type=bind"
   ],

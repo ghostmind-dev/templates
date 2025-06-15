@@ -6,9 +6,7 @@
     "core": {
       "path": "run",
       "global": false,
-      "containers": [
-        "default"
-      ]
+      "containers": ["default"]
     }
   },
   "docker": {
@@ -25,13 +23,9 @@
     }
   },
   "routines": {
-    "dev": "run custom dev buld up",
+    "dev": "run custom dev build up",
     "console": "run custom dev console",
     "activate": "run action local state -W --no-reuse"
   },
-  "tags": [
-    "app",
-    "hasura",
-    "db"
-  ]
+  "tags": ["app", "hasura", "db"]
 }

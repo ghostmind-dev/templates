@@ -1,0 +1,26 @@
+{
+  "id": "8Ye2KLHFyNF1",
+  "name": "mcp-stream",
+  "type": "app",
+  "docker": {
+    "default": {
+      "root": "docker",
+      "image": "gcr.io/ghostmind-core/templates-mcp-stream",
+      "env_based": false,
+      "context_dir": "app"
+    }
+  },
+  "compose": {
+    "default": {
+      "root": "local",
+      "filename": "compose.yaml"
+    }
+  },
+  "terraform": {
+    "default": {
+      "path": "infra",
+      "global": false,
+      "containers": ["default"]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
     "mcpServers": {
-        "db-query": {
+        "hasura-db": {
             "command": "/workspaces/templates/dev/run/bin/cmd.ts",
             "args": [
                 "misc",
@@ -11,6 +11,12 @@
                 "/workspaces/templates/templates/app-hasura-db/.env.mcp"
             ],
             "env": {}
+        },
+        "get-temperature": {
+            "url": "http://localhost:3000/mcp",
+            "headers": {
+                "Authorization": "APP-MCP-STREAM-SERVER-TOKEN"
+            }
         }
     }
 }
