@@ -1,5 +1,5 @@
 import type { CustomArgs, CustomOptions } from 'jsr:@ghostmind/run';
-import { $, cd } from 'npm:zx@8.1.2';
+import { $, cd, sleep } from 'npm:zx@8.1.2';
 
 export default async function (_arg: CustomArgs, opts: CustomOptions) {
   const { main, currentPath } = opts;
@@ -16,11 +16,11 @@ export default async function (_arg: CustomArgs, opts: CustomOptions) {
     docker: 'default',
   });
 
-  cd(`${currentPath}/app/state`);
+  // cd(`${currentPath}/app/state`);
 
-  const HASURA_GRAPHQL_ENDPOINT = Deno.env.get('HASURA_GRAPHQL_ENDPOINT');
+  // const HASURA_GRAPHQL_ENDPOINT = Deno.env.get('HASURA_GRAPHQL_ENDPOINT');
 
-  await $`hasura migrate apply --endpoint ${HASURA_GRAPHQL_ENDPOINT} --database-name default`;
+  // await $`hasura migrate apply --endpoint ${HASURA_GRAPHQL_ENDPOINT} --database-name default`;
 
-  await $`hasura metadata apply --endpoint ${HASURA_GRAPHQL_ENDPOINT}`;
+  // await $`hasura metadata apply --endpoint ${HASURA_GRAPHQL_ENDPOINT}`;
 }

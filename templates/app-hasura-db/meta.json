@@ -14,7 +14,7 @@
   "docker": {
     "default": {
       "root": "docker",
-      "image": "gcr.io/ghostmind-core/templates-state",
+      "image": "gcr.io/ghostmind-core/templates-app-hasura-db",
       "env_based": false
     }
   },
