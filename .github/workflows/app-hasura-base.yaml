@@ -1,4 +1,4 @@
-name: app-hasura-db
+name: app-hasura-base
 on:
   workflow_dispatch:
 env:
@@ -7,7 +7,7 @@ env:
   VAULT_ROOT_TOKEN: ${{ secrets.VAULT_ROOT_TOKEN }}
   VAULT_ADDR: ${{ secrets.VAULT_ADDR}}
 jobs:
-  app-hasura-db:
+  app-hasura-base:
     runs-on: ubuntu-latest
     defaults:
       run:
