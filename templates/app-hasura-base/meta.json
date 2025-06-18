@@ -1,6 +1,6 @@
 {
-  "id": "lWatCfm3C45R",
-  "name": "app-hasura-db",
+  "id": "ex0tPgO5T87H",
+  "name": "app-hasura-base",
   "type": "template",
   "terraform": {
     "core": {
@@ -14,7 +14,7 @@
   "docker": {
     "default": {
       "root": "docker",
-      "image": "gcr.io/ghostmind-core/templates-app-hasura-db",
+      "image": "gcr.io/ghostmind-core/templates-app-hasura-base",
       "env_based": false
     }
   },
@@ -27,7 +27,7 @@
   "routines": {
     "dev": "run custom dev build up",
     "console": "run custom dev console",
-    "activate": "run action local ${APP} -W --no-reuse"
+    "activate": "run action local app-hasura-base -W --no-reuse"
   },
   "mcp": {
     "question-database": {
@@ -36,10 +36,10 @@
         "mcp-graphql"
       ],
       "env": {
-        "ENDPOINT": "${HASURA_GRAPHQL_ENDPOINT}/v1/graphql",
+        "ENDPOINT": "http://localhost:5080/v1/graphql",
         "HEADERS": {
           "content-type": "application/json",
-          "x-hasura-admin-secret": "${HASURA_GRAPHQL_ADMIN_SECRET}"
+          "x-hasura-admin-secret": "148f4c16-2c6f-4f63-b3ab-3f52f44a2e77"
         },
         "ALLOW_MUTATIONS": "false"
       }
