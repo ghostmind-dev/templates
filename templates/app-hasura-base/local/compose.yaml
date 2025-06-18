@@ -2,8 +2,8 @@ services:
   templates_state:
     container_name: app-hasura-db
     build:
-      context: ${SRC}/templates/app-hasura-db/app
-      dockerfile: ${SRC}/templates/app-hasura-db/docker/Dockerfile
+      context: ${SRC}/templates/app-hasura-base/app
+      dockerfile: ${SRC}/templates/app-hasura-base/docker/Dockerfile
     restart: always
     env_file:
       - ${SRC}/templates/app-hasura-db/.env.local
