@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{env.SRC}}/templates/app-hasura-db
+        working-directory: ${{env.SRC}}/templates/app-hasura-base
     steps:
       - name: run git safe.directory
         if: ${{ github.event.inputs.LOCAL == 'true' }}
@@ -46,6 +46,6 @@ jobs:
       - name: 'set directory secrets'
         uses: ghostmind-dev/play/actions/secrets@main
         with:
-          dir: ${{ github.workspace }}/templates/app-hasura-db
+          dir: ${{ github.workspace }}/templates/app-hasura-base
       - name: 'deploy app'
         run: run custom init --all
