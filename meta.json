@@ -1,5 +1,11 @@
 {
     "id": "eGF9qqR8owMG",
     "name": "templates",
-    "type": "project"
+    "type": "project",
+    "tunnel": {
+        "app": {
+            "hostname": "something.ghostmind.app",
+            "service": "http://host.docker.internal:8080"
+        }
+    }
 }
