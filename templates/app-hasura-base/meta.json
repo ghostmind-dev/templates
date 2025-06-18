@@ -14,7 +14,7 @@
   "docker": {
     "default": {
       "root": "docker",
-      "image": "gcr.io/ghostmind-core/templates-app-hasura-base",
+      "image": "gcr.io/ghostmind-core/${APP}",
       "env_based": false
     }
   },
@@ -27,7 +27,8 @@
   "routines": {
     "dev": "run custom dev build up",
     "console": "run custom dev console",
-    "activate": "run action local app-hasura-base -W --no-reuse"
+    "activate": "run action local ${APP} -W --no-reuse",
+    "init": "run action remote ${APP} --watch --branch=main"
   },
   "mcp": {
     "question-database": {
@@ -39,7 +40,7 @@
         "ENDPOINT": "http://localhost:5080/v1/graphql",
         "HEADERS": {
           "content-type": "application/json",
-          "x-hasura-admin-secret": "148f4c16-2c6f-4f63-b3ab-3f52f44a2e77"
+          "x-hasura-admin-secret": "${HASURA_ADMIN_SECRET}"
         },
         "ALLOW_MUTATIONS": "false"
       }
