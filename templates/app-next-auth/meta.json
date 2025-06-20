@@ -1,9 +1,12 @@
 {
-  "id": "v8XgSDVvzD90",
+  "id": "a6BDIv2HRupc",
   "name": "app-next-auth",
   "description": "Next.js UI with Auth",
   "custom": {
     "root": "scripts"
+  },
+  "secrets": {
+    "base": "base"
   },
   "docker": {
     "default": {
@@ -22,14 +25,12 @@
     "core": {
       "path": "infra",
       "global": false,
-      "containers": [
-        "default"
-      ]
+      "containers": ["default"]
     }
   },
   "tunnel": {
     "default": {
-      "hostname": "templates-ui.ghostmind.app",
+      "hostname": "${APP}.ghostmind.app",
       "service": "http://localhost:5001"
     }
   },
@@ -37,8 +38,5 @@
     "dev": "run custom dev build up",
     "activate": "run action local ui -W --no-reuse"
   },
-  "tags": [
-    "app",
-    "next-auth"
-  ]
+  "tags": ["app", "next-auth"]
 }
