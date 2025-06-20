@@ -1,8 +1,8 @@
-import NextAuth from 'next-auth';
-import Google from 'next-auth/providers/google';
-import { GraphQLClient, gql } from 'graphql-request';
-import jwt from 'jsonwebtoken';
-import { cookies } from 'next/headers';
+import NextAuth from "next-auth";
+import Google from "next-auth/providers/google";
+import { GraphQLClient, gql } from "graphql-request";
+import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 //////////////////////////////////////////////////////////////////////
 // INTERFACES
@@ -24,7 +24,7 @@ async function createUser({ email, givenName, familyName, userId }: dbUser) {
   const endpoint_login = process.env.DB_USERS_ENDPOINT;
   const graphQLClient = new GraphQLClient(endpoint_login!, {
     headers: {
-      'X-Hasura-Admin-Secret': process.env.DB_USERS_SECRET!,
+      "X-Hasura-Admin-Secret": process.env.DB_USERS_SECRET!,
     },
   });
 
@@ -56,7 +56,7 @@ async function createUser({ email, givenName, familyName, userId }: dbUser) {
     givenName,
     familyName,
     userId,
-    role: 'user',
+    role: "user",
   });
 }
 
@@ -95,7 +95,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       const graphQLClient = new GraphQLClient(endpoint_login!, {
         headers: {
-          'X-Hasura-Admin-Secret': process.env.DB_USERS_SECRET!,
+          "X-Hasura-Admin-Secret": process.env.DB_USERS_SECRET!,
         },
       });
 
@@ -128,7 +128,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           givenName: name,
           familyName: name,
           userId: id,
-          role: 'user',
+          role: "user",
         });
       }
 
@@ -136,28 +136,28 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       const secret = process.env.HASURA_GRAPHQL_JWT_SECRET;
 
       const hasuraClaims = {
-        'https://hasura.io/jwt/claims': {
-          'x-hasura-default-role': 'user',
-          'x-hasura-allowed-roles': ['user'],
-          'x-hasura-user-id': id,
+        "https://hasura.io/jwt/claims": {
+          "x-hasura-default-role": "user",
+          "x-hasura-allowed-roles": ["user"],
+          "x-hasura-user-id": id,
         },
       };
 
       if (!secret) {
         throw new Error(
-          'Secret key is undefined. Make sure it is properly set.'
+          "Secret key is undefined. Make sure it is properly set."
         );
       }
 
-      const token = jwt.sign(hasuraClaims, secret, { expiresIn: '10y' });
+      const token = jwt.sign(hasuraClaims, secret, { expiresIn: "10y" });
 
       // set cookie
       const cookieStore = await cookies();
       cookieStore.set({
-        name: 'hasura-jwt',
+        name: "hasura-jwt",
         value: token,
         httpOnly: true,
-        path: '/',
+        path: "/",
       });
     },
   },

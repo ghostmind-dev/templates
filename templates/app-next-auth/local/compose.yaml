@@ -1,17 +1,19 @@
 services:
   ui:
-    container_name: templates-ui
+    container_name: ${APP}
     build:
-      context: ${SRC}/templates/app/ui/app
-      dockerfile: ${SRC}/templates/app/ui/docker/Dockerfile
+      context: ${SRC}/${PROJECT}/${APP}/app
+      dockerfile: ${SRC}/${PROJECT}/${APP}/docker/Dockerfile
       args:
-        LOCAL: 'true'
+        LOCAL: "true"
     env_file:
-      - ${SRC}/templates/app/ui/.env.local
+      - ${SRC}/${PROJECT}/${APP}/.env.base
+      - ${SRC}/${PROJECT}/${APP}/.env.local
     ports:
       - ${PORT}:${PORT}
     environment:
+      APP: ${APP}
       LOCALHOST_SRC: ${LOCALHOST_SRC}
     volumes:
-      - ${LOCALHOST_SRC}/templates/app/ui/app:/usr/app/main
-    command: ['npm', 'run', 'dev']
+      - ${LOCALHOST_SRC}/${PROJECT}/${APP}/app:/usr/app/main
+    command: ["npm", "run", "dev"]

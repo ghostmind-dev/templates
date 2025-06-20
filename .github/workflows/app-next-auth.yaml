@@ -1,4 +1,4 @@
-name: ui
+name: app-next-auth
 on:
   workflow_dispatch:
 env:
@@ -7,11 +7,11 @@ env:
   VAULT_ROOT_TOKEN: ${{ secrets.VAULT_ROOT_TOKEN }}
   VAULT_ADDR: ${{ secrets.VAULT_ADDR}}
 jobs:
-  ui:
+  app-next-auth:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{env.SRC}}/templates/app/ui
+        working-directory: ${{env.SRC}}/templates/app/app-next-auth
     steps:
       - name: run git safe.directory
         if: ${{ github.event.inputs.LOCAL == 'true' }}
@@ -44,6 +44,6 @@ jobs:
       - name: 'set directory secrets'
         uses: ghostmind-dev/play/actions/secrets@main
         with:
-          dir: ${{ github.workspace }}/templates/app/ui
+          dir: ${{ github.workspace }}/templates/app/app-next-auth
       - name: 'deploy app'
         run: run custom init --all
