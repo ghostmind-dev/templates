@@ -1,20 +1,16 @@
 import { dockerComposeBuild, dockerComposeUp } from 'jsr:@ghostmind/run';
 import type { CustomArgs, CustomOptions } from 'jsr:@ghostmind/run';
 
-export default async function (_arg: CustomArgs, opts: CustomOptions) {
-  const { run, start } = opts;
+export default async function (args: CustomArgs, opts: CustomOptions) {
+  const { run, has } = opts;
 
-  await start({
-    build: {
-      command: dockerComposeBuild,
-      priority: 998,
-    },
-    tunnel: `${run} tunnel run`,
-    up: {
-      command: dockerComposeUp,
-      options: {
-        forceRecreate: false,
-      },
-    },
-  });
+  if (has('build')) {
+    await dockerComposeBuild({});
+  }
+
+  if (has('up')) {
+    await dockerComposeUp({
+      forceRecreate: true,
+    });
+  }
 }
