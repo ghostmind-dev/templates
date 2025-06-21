@@ -1,13 +1,44 @@
 # variables.tf
 
-variable "PROJECT" {}
-variable "APP" {}
-variable "PORT" {}
-variable "SERVER_TOKEN" {}
-variable "ENVIRONMENT" {}
-variable "SERVER_URL" {}
-variable "IMAGE_DIGEST_DEFAULT" {}
-variable "GCP_PROJECT_ID" {}
+variable "PROJECT" {
+  type      = string
+  sensitive = true
+}
+
+variable "APP" {
+  type      = string
+  sensitive = true
+}
+
+variable "PORT" {
+  type      = string
+  sensitive = true
+}
+
+variable "SERVER_TOKEN" {
+  type      = string
+  sensitive = true
+}
+
+variable "ENVIRONMENT" {
+  type      = string
+  sensitive = true
+}
+
+variable "SERVER_URL" {
+  type      = string
+  sensitive = true
+}
+
+variable "IMAGE_DIGEST_DEFAULT" {
+  type      = string
+  sensitive = true
+}
+
+variable "GCP_PROJECT_ID" {
+  type      = string
+  sensitive = true
+}
 
 
 locals {
@@ -43,4 +74,4 @@ locals {
   ]
 }
 
-  
+
