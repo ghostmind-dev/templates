@@ -2,8 +2,6 @@ FROM node:20
 
 WORKDIR /usr/app/
 
-ARG RUN_ENV
-
 COPY package*.json ./
 
 RUN npm cache clean --force

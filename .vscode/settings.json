@@ -25,7 +25,8 @@
     "**/.npmignore": false
   },
   "files.associations": {
-    "*.json": "jsonc"
+    "*.json": "jsonc",
+    "**/meta.json": "json"
   },
   "deno.enable": true,
   "deno.lint": true,
@@ -228,6 +229,8 @@
       "url": "https://raw.githubusercontent.com/ghostmind-dev/config/main/config/meta/schema.json"
     }
   ],
+  "json.validate.enable": true,
+  "json.schemaDownload.enable": true,
   "[dockerfile]": {
     "editor.formatOnSave": false
   },
