@@ -1,5 +1,5 @@
 {
-  "id": "8Ye2KLHFyNF1",
+  "id": "ui-8Ilv3zuKx",
   "name": "mcp-stream",
   "type": "template",
   "secrets": {
@@ -8,7 +8,7 @@
   "docker": {
     "default": {
       "root": "docker",
-      "image": "gcr.io/ghostmind-core/templates-mcp-stream",
+      "image": "gcr.io/ghostmind-core/templates-app-mcp-stream",
       "env_based": false,
       "context_dir": "app"
     }
@@ -28,9 +28,9 @@
   },
   "mcp": {
     "from_mcp_stream": {
-      "url": "${SERVER_URL}",
+      "url": "http://localhost:3008/mcp",
       "headers": {
-        "Authorization": "${SERVER_TOKEN}"
+        "Authorization": "78c85aac-db45-4ec1-ad9e-55c21c809fc0"
       }
     }
   }
