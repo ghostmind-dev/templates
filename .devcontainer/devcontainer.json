@@ -59,7 +59,7 @@
         "equinusocio.vsc-material-theme",
         "wesbos.theme-cobalt2",
         "sumneko.lua",
-        "ghostmind.hide-unhide",
+        "ghostmind.hide-unhide@0.0.3",
         "tinkertrain.theme-panda",
         "golang.go",
         "yinfei.luahelper",
