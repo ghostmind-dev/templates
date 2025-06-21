@@ -1,17 +1,17 @@
 services:
-  templates_state:
-    container_name: app-hasura-db
+  app:
+    container_name: ${APP}
     build:
-      context: ${SRC}/templates/app-hasura-base/app
-      dockerfile: ${SRC}/templates/app-hasura-base/docker/Dockerfile
+      context: ${SRC}/${PROJECT}/${APP}/app
+      dockerfile: ${SRC}/${PROJECT}/${APP}/docker/Dockerfile
     restart: always
     env_file:
-      - ${SRC}/templates/app-hasura-db/.env.local
-      - ${SRC}/templates/app-hasura-db/.env.base
+      - ${SRC}/${PROJECT}/${APP}/.env.base
+      - ${SRC}/${PROJECT}/${APP}/.env.local
     environment:
+      APP: ${APP}
       HASURA_GRAPHQL_ENABLE_CONSOLE: 'false'
       HASURA_GRAPHQL_SERVER_PORT: ${PORT}
       HASURA_GRAPHQL_ENABLE_TELEMETRY: 'false'
-
     ports:
       - ${PORT}:${PORT}

@@ -8,7 +8,7 @@ export default async function (_arg: CustomArgs, opts: CustomOptions) {
   const PGUSER = Deno.env.get('PGUSER');
   const PGPASSWORD = Deno.env.get('PGPASSWORD');
   const PGPORT = Deno.env.get('PGPORT') || '5432';
-  const DB_NAME = Deno.env.get('DB_NAME') || 'my_new_db';
+  const DB_NAME = Deno.env.get('DB_NAME') || '';
 
   const dbName = _arg[0] || DB_NAME;
 
