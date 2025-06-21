@@ -1,19 +1,20 @@
 # variables.tf
 
-variable "ENVIRONMENT" {}
+variable "PROJECT" {}
 variable "APP" {}
 variable "PORT" {}
 variable "SERVER_TOKEN" {}
+variable "ENVIRONMENT" {}
+variable "SERVER_URL" {}
 variable "IMAGE_DIGEST_DEFAULT" {}
-variable "PROJECT" {}
 variable "GCP_PROJECT_ID" {}
 
 
 locals {
   env_vars = [
     {
-      name  = "ENVIRONMENT"
-      value = var.ENVIRONMENT
+      name  = "PROJECT"
+      value = var.PROJECT
     },
     {
       name  = "APP"
@@ -24,12 +25,16 @@ locals {
       value = var.SERVER_TOKEN
     },
     {
-      name  = "IMAGE_DIGEST_DEFAULT"
-      value = var.IMAGE_DIGEST_DEFAULT
+      name  = "ENVIRONMENT"
+      value = var.ENVIRONMENT
     },
     {
-      name  = "PROJECT"
-      value = var.PROJECT
+      name  = "SERVER_URL"
+      value = var.SERVER_URL
+    },
+    {
+      name  = "IMAGE_DIGEST_DEFAULT"
+      value = var.IMAGE_DIGEST_DEFAULT
     },
     {
       name  = "GCP_PROJECT_ID"

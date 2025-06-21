@@ -210,7 +210,7 @@ async function handleMCPRequest(request: MCPRequest): Promise<MCPResponse> {
 // Start the HTTP server
 Deno.serve(
   {
-    port: 3000,
+    port: Number(Deno.env.get('PORT')),
     hostname: '0.0.0.0',
   },
   async (req: Request) => {

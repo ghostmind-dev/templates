@@ -2,27 +2,28 @@ services:
   mcp_stream:
     container_name: ${APP}
     build:
-      context: ${SRC}/templates/app-mcp-stream/app
-      dockerfile: ${SRC}/templates/app-mcp-stream/docker/Dockerfile.dev
+      context: ${SRC}/${PROJECT}/${APP}/app
+      dockerfile: ${SRC}/${PROJECT}/${APP}/docker/Dockerfile.dev
       args:
-        LOCAL: "true"
+        LOCAL: 'true'
     env_file:
-      - ${SRC}/templates/app-mcp-stream/.env.local
+      - ${SRC}/${PROJECT}/${APP}/.env.base
+      - ${SRC}/${PROJECT}/${APP}/.env.local
     ports:
-      - "3000:3000"
+      - ${PORT}:${PORT}
     environment:
       APP: ${APP}
       LOCALHOST_SRC: ${LOCALHOST_SRC}
       DENO_ENV: development
     volumes:
-      - ${LOCALHOST_SRC}/templates/app-mcp-stream/app:/app
+      - ${LOCALHOST_SRC}/${PROJECT}/${APP}/app:/app
     command:
       [
-        "deno",
-        "run",
-        "--allow-net",
-        "--allow-read",
-        "--allow-env",
-        "--watch=.",
-        "server.ts",
+        'deno',
+        'run',
+        '--allow-net',
+        '--allow-read',
+        '--allow-env',
+        '--watch=.',
+        'server.ts',
       ]
