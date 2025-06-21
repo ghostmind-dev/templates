@@ -1,5 +1,5 @@
 services:
-  ui:
+  app:
     container_name: ${APP}
     build:
       context: ${SRC}/${PROJECT}/${APP}/app

@@ -15,7 +15,7 @@
   "docker": {
     "default": {
       "root": "docker",
-      "image": "gcr.io/ghostmind-core/${APP}",
+      "image": "gcr.io/ghostmind-core/templates-${APP}",
       "env_based": false
     }
   },

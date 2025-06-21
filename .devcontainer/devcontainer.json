@@ -21,6 +21,7 @@
   "containerEnv": {
     "INIT_RESET_LIVE": "false",
     "INIT_RESET_DOCS": "true",
+    "INIT_RESET_DOCS_NAME": "refs",
     "INIT_LOGIN_GCP": "true",
     "INIT_LOGIN_GHCR": "false",
     "INIT_LOGIN_CLOUDFLARE": "true"
@@ -59,7 +60,6 @@
         "equinusocio.vsc-material-theme",
         "wesbos.theme-cobalt2",
         "sumneko.lua",
-        "ghostmind.hide-unhide@0.0.3",
         "tinkertrain.theme-panda",
         "golang.go",
         "yinfei.luahelper",
