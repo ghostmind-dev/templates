@@ -29,16 +29,12 @@ if (!SERVER_TOKEN) {
   Deno.exit(1);
 }
 
-// Token authentication middleware
+// Token authentication middleware following MCP authorization spec
 function authenticateRequest(req: Request): boolean {
   const authHeader = req.headers.get('Authorization');
 
   console.log('=== AUTHENTICATION DEBUG ===');
-  console.log('Expected SERVER_TOKEN:', SERVER_TOKEN);
   console.log('Received Authorization header:', authHeader);
-  console.log('Header type:', typeof authHeader);
-  console.log('Token type:', typeof SERVER_TOKEN);
-  console.log('Are they equal?', authHeader === SERVER_TOKEN);
   console.log('============================');
 
   if (!authHeader) {
@@ -46,15 +42,26 @@ function authenticateRequest(req: Request): boolean {
     return false;
   }
 
-  // Validate against the expected server token
-  if (authHeader !== SERVER_TOKEN) {
-    console.log('❌ Invalid token provided');
-    console.log('   Expected:', SERVER_TOKEN);
+  // Check for Bearer token format as per MCP spec
+  if (!authHeader.startsWith('Bearer ')) {
+    console.log('❌ Authorization header must use Bearer token format');
+    console.log('   Expected format: Bearer <token>');
     console.log('   Received:', authHeader);
     return false;
   }
 
-  console.log('✅ Authentication successful');
+  // Extract the token from "Bearer <token>"
+  const token = authHeader.substring(7); // Remove "Bearer " prefix
+
+  // Validate against the expected server token
+  if (token !== SERVER_TOKEN) {
+    console.log('❌ Invalid bearer token provided');
+    console.log('   Expected token:', SERVER_TOKEN);
+    console.log('   Received token:', token);
+    return false;
+  }
+
+  console.log('✅ Bearer token authentication successful');
   return true;
 }
 
@@ -229,8 +236,48 @@ Deno.serve(
       });
     }
 
-    // Only handle /mcp endpoint
+    // Handle different endpoints
     const url = new URL(req.url);
+
+    // OAuth 2.0 Protected Resource Metadata endpoint (RFC 9728)
+    if (url.pathname === '/.well-known/oauth-protected-resource') {
+      return new Response(
+        JSON.stringify({
+          resource: `${url.origin}/mcp`,
+          authorization_servers: [`${url.origin}`],
+        }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
+      );
+    }
+
+    // OAuth 2.0 Authorization Server Metadata endpoint (RFC 8414)
+    if (url.pathname === '/.well-known/oauth-authorization-server') {
+      return new Response(
+        JSON.stringify({
+          issuer: url.origin,
+          authorization_endpoint: `${url.origin}/oauth/authorize`,
+          token_endpoint: `${url.origin}/oauth/token`,
+          response_types_supported: ['code'],
+          grant_types_supported: ['authorization_code'],
+          code_challenge_methods_supported: ['S256'],
+        }),
+        {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        }
+      );
+    }
+
+    // Only handle /mcp endpoint for MCP requests
     if (url.pathname !== '/mcp') {
       return new Response('Not Found', { status: 404 });
     }
@@ -241,6 +288,8 @@ Deno.serve(
         status: 401,
         headers: {
           'Access-Control-Allow-Origin': '*',
+          'WWW-Authenticate':
+            'Bearer realm="MCP Server", error="invalid_token"',
         },
       });
     }
@@ -294,8 +343,10 @@ Deno.serve(
   }
 );
 
-console.log('🚀 MCP Server starting on http://localhost:3000/mcp');
+console.log('🚀 MCP Server starting on http://localhost:3008/mcp');
 console.log('🔐 Server token loaded from SERVER_TOKEN environment variable');
-console.log('📝 Use Authorization: <your-token> header for authentication');
+console.log(
+  '📝 Use Authorization: Bearer <your-token> header for authentication'
+);
 console.log('🔧 Available tools: get_temperature');
 console.log('📁 Available resources: test://example');

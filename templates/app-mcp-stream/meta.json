@@ -30,7 +30,7 @@
     "from_mcp_stream": {
       "url": "http://localhost:3008/mcp",
       "headers": {
-        "Authorization": "78c85aac-db45-4ec1-ad9e-55c21c809fc0"
+        "Authorization": "Bearer ${SERVER_TOKEN}"
       }
     }
   }
