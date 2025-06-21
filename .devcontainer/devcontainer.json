@@ -19,7 +19,7 @@
     "VAULT_ADDR": "${localEnv:VAULT_ADDR}"
   },
   "containerEnv": {
-    "INIT_RESET_LIVE": "true",
+    "INIT_RESET_LIVE": "false",
     "INIT_RESET_DOCS": "true",
     "INIT_LOGIN_GCP": "true",
     "INIT_LOGIN_GHCR": "false",
