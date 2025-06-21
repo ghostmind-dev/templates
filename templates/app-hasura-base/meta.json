@@ -2,13 +2,14 @@
   "id": "ex0tPgO5T87H",
   "name": "app-hasura-base",
   "type": "template",
+  "secrets": {
+    "base": "base"
+  },
   "terraform": {
     "core": {
       "path": "run",
       "global": false,
-      "containers": [
-        "default"
-      ]
+      "containers": ["default"]
     }
   },
   "docker": {
@@ -33,9 +34,7 @@
   "mcp": {
     "question-database": {
       "command": "npx",
-      "args": [
-        "mcp-graphql"
-      ],
+      "args": ["mcp-graphql"],
       "env": {
         "ENDPOINT": "http://localhost:5080/v1/graphql",
         "HEADERS": {
@@ -46,19 +45,10 @@
       }
     }
   },
-  "tags": [
-    "app",
-    "hasura",
-    "db"
-  ],
+  "tags": ["app", "hasura", "db"],
   "template": {
     "ignoreFolders": [],
     "ignoreFiles": [],
-    "init": [
-      "run custom start"
-    ]
-  },
-  "secrets": {
-    "base": "base"
+    "init": ["run custom start"]
   }
 }

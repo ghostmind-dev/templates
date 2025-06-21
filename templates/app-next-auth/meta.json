@@ -30,7 +30,7 @@
   },
   "tunnel": {
     "default": {
-      "hostname": "${APP}.ghostmind.app",
+      "hostname": "${TUNNEL_NAME}",
       "service": "http://localhost:5001"
     }
   },
