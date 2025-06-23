@@ -35,6 +35,6 @@
     }
   },
   "template": {
-    "init": ["run custom start"]
+    "init": ["run vault kv export --all", "run meta change id"]
   }
 }
