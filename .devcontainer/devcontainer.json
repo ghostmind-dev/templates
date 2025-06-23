@@ -80,7 +80,8 @@
         "vscode-icons-team.vscode-icons",
         "ms-toolsai.jupyter",
         "github.vscode-pull-request-github",
-        "hediet.vscode-drawio"
+        "hediet.vscode-drawio",
+        "ghostmind.hide-unhide"
       ]
     }
   }
