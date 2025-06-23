@@ -1,6 +1,6 @@
 {
   "id": "ui-8Ilv3zuKx",
-  "name": "mcp-stream",
+  "name": "app-mcp-stream",
   "type": "template",
   "secrets": {
     "base": "base"
