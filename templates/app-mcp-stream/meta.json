@@ -8,7 +8,7 @@
   "docker": {
     "default": {
       "root": "docker",
-      "image": "gcr.io/ghostmind-core/templates-app-mcp-stream",
+      "image": "gcr.io/ghostmind-core/${PROJECT}-${APP}",
       "env_based": false,
       "context_dir": "app"
     }
