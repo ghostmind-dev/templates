@@ -1,6 +1,19 @@
 // Simple MCP Server with Bearer Token Authentication
 // This is a basic implementation that handles MCP protocol manually
 
+import {
+  tools as temperatureTools,
+  toolExecutors as temperatureExecutors,
+} from './tools/temperature.ts';
+
+// Combine all tools
+const tools = [...temperatureTools];
+
+// Combine all tool executors
+const toolExecutors = {
+  ...temperatureExecutors,
+};
+
 interface MCPRequest {
   jsonrpc: '2.0';
   id: string | number;
@@ -92,22 +105,7 @@ async function handleMCPRequest(request: MCPRequest): Promise<MCPResponse> {
         jsonrpc: '2.0',
         id: request.id,
         result: {
-          tools: [
-            {
-              name: 'get_temperature',
-              description: 'Get the current temperature for a country',
-              inputSchema: {
-                type: 'object',
-                properties: {
-                  country: {
-                    type: 'string',
-                    description: 'Name of the country to get temperature for',
-                  },
-                },
-                required: ['country'],
-              },
-            },
-          ],
+          tools: tools,
         },
       };
 
@@ -115,35 +113,29 @@ async function handleMCPRequest(request: MCPRequest): Promise<MCPResponse> {
       const toolName = request.params?.name;
       const toolArgs = request.params?.arguments;
 
-      if (toolName === 'get_temperature') {
-        const country = toolArgs?.country;
-        if (!country) {
+      // Check if tool exists and execute it
+      const executor = toolExecutors[toolName];
+      if (executor) {
+        try {
+          const result = await executor(toolArgs);
+          return {
+            jsonrpc: '2.0',
+            id: request.id,
+            result: result,
+          };
+        } catch (error) {
           return {
             jsonrpc: '2.0',
             id: request.id,
             error: {
               code: -32602,
-              message: 'Country parameter is required',
+              message:
+                error instanceof Error
+                  ? error.message
+                  : 'Tool execution failed',
             },
           };
         }
-
-        // Generate a random temperature between -20°C and 40°C
-        const temperature = Math.floor(Math.random() * 61) - 200;
-
-        console.log(`Temperature requested for ${country}: ${temperature}°C`);
-        return {
-          jsonrpc: '2.0',
-          id: request.id,
-          result: {
-            content: [
-              {
-                type: 'text',
-                text: `The current temperature in ${country} is ${temperature}°C`,
-              },
-            ],
-          },
-        };
       }
 
       return {
@@ -348,5 +340,5 @@ console.log('🔐 Server token loaded from SERVER_TOKEN environment variable');
 console.log(
   '📝 Use Authorization: Bearer <your-token> header for authentication'
 );
-console.log('🔧 Available tools: get_temperature');
+console.log(`🔧 Available tools: ${tools.map((tool) => tool.name).join(', ')}`);
 console.log('📁 Available resources: test://example');

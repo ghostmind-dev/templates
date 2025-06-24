@@ -37,197 +37,6 @@
   "deno.disablePaths": [
     "/workspace/templates/app-next-auth/app"
   ],
-  "vsicons.associations.folders": [
-    {
-      "icon": "cubit",
-      "extensions": [
-        "library-scripts"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "cubit",
-      "extensions": [
-        "app-hasura-base"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "cubit",
-      "extensions": [
-        "app-mcp-stream"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "cubit",
-      "extensions": [
-        "custom-dev-base"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "docs",
-      "extensions": [
-        "refs"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "cubit",
-      "extensions": [
-        "terraform-run-base"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "cubit",
-      "extensions": [
-        "terraform-run-gpu"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "cubit",
-      "extensions": [
-        "app-next-auth"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "app",
-      "extensions": [
-        "templates"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "bloc",
-      "extensions": [
-        ".cursor"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "log",
-      "extensions": [
-        "scripts"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "audio",
-      "extensions": [
-        "dev"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "audio",
-      "extensions": [
-        "aim"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "docker",
-      "extensions": [
-        "container"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "e2e",
-      "extensions": [
-        "workflows"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "buildkite",
-      "extensions": [
-        "run"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "app",
-      "extensions": [
-        "app"
-      ],
-      "format": "svg"
-    }
-  ],
-  "vsicons.associations.files": [
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.local"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.base"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.mcp"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.prod"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.dev"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.remote"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "config",
-      "extensions": [
-        ".env.shared"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "codacy",
-      "extensions": [
-        ".env.template"
-      ],
-      "format": "svg"
-    },
-    {
-      "icon": "map",
-      "extensions": [
-        ".md"
-      ],
-      "format": "svg"
-    }
-  ],
-  "python.analysis.diagnosticSeverityOverrides": {
-    "reportMissingImports": "none",
-    "reportMissingModuleSource": "none",
-    "reportUndefinedVariable": "none"
-  },
   "json.schemas": [
     {
       "fileMatch": [
@@ -244,5 +53,35 @@
   "shellformat.effectLanguages": [
     "dotenv",
     "gitignore"
-  ]
+  ],
+  "material-icon-theme.folders.associations": {
+    ".cursor": "resource",
+    ".devcontainer": "base",
+    "app": "app",
+    "docker": "docker",
+    "infra": "terraform",
+    "local": "mappings",
+  },
+  "material-icon-theme.files.associations": {
+    "**.env.base": "settings",
+    "**.env.dev": "settings",
+    "**.env.local": "settings",
+    "**.env.prod": "settings"
+  },
+  "material-icon-theme.files.customClones": [
+    {
+      "name": "settings-template",
+      "base": "settings",
+      "color": "green-400",
+      "fileNames": [
+        ".env.template"
+      ]
+    }
+  ],
+  "explorer.decorations.colors": true,
+  "explorer.decorations.badges": true,
+  "git.decorations.enabled": true,
+  "workbench.colorCustomizations": {
+    "gitDecoration.ignoredResourceForeground": "#d8bf20"
+  }
 }
