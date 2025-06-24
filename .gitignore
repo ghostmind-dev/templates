@@ -79,7 +79,6 @@ __pycache__
 .env.local
 
 **/.env.*
-**/.env.*
 **/.env.local
 **/.env.preview
 **/.env.prod

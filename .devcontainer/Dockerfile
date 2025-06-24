@@ -8,7 +8,11 @@ FROM ghcr.io/ghostmind-dev/dvc:latest
 # POST-ATTACH
 ############################################################################
 
+
+
 COPY library-scripts/post-create.ts /usr/local/share/
+
+
 
 ############################################################################
 # THE END
