@@ -1,7 +1,7 @@
 {
   "files.exclude": {
-    "**/dev": true,
-    "**/refs": true
+    "**/dev": false,
+    "**/refs": false
   },
   "deno.disablePaths": [
     "/workspace/templates/app-next-auth/app"

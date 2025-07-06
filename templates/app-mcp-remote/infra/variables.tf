@@ -10,11 +10,6 @@ variable "SERVER_TOKEN" {
   sensitive = true
 }
 
-variable "GITHUB_TOKEN" {
-  type      = string
-  sensitive = true
-}
-
 variable "ENVIRONMENT" {
   type      = string
   sensitive = true
@@ -51,10 +46,6 @@ locals {
     {
       name  = "SERVER_TOKEN"
       value = var.SERVER_TOKEN
-    },
-    {
-      name  = "GITHUB_TOKEN"
-      value = var.GITHUB_TOKEN
     },
     {
       name  = "ENVIRONMENT"
