@@ -1,18 +1,7 @@
 // Simple MCP Server with Bearer Token Authentication
 // This is a basic implementation that handles MCP protocol manually
 
-import {
-  tools as temperatureTools,
-  toolExecutors as temperatureExecutors,
-} from './tools/temperature.ts';
-
-// Combine all tools
-const tools = [...temperatureTools];
-
-// Combine all tool executors
-const toolExecutors = {
-  ...temperatureExecutors,
-};
+import { tools, toolExecutors } from './tools/temperature.ts';
 
 interface MCPRequest {
   jsonrpc: '2.0';
@@ -32,54 +21,34 @@ interface MCPResponse {
   };
 }
 
-// Get the expected server token from environment
-const SERVER_TOKEN = Deno.env.get('SERVER_TOKEN');
-
-if (!SERVER_TOKEN) {
-  console.error('❌ SERVER_TOKEN environment variable is required but not set');
-  console.error('   Please set SERVER_TOKEN before starting the server');
-  console.error('   Example: export SERVER_TOKEN=your-secret-token');
-  Deno.exit(1);
-}
-
-// Token authentication middleware following MCP authorization spec
+// Authentication function
 function authenticateRequest(req: Request): boolean {
   const authHeader = req.headers.get('Authorization');
-
-  console.log('=== AUTHENTICATION DEBUG ===');
-  console.log('Received Authorization header:', authHeader);
-  console.log('============================');
-
-  if (!authHeader) {
-    console.log('❌ Missing Authorization header');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return false;
   }
 
-  // Check for Bearer token format as per MCP spec
-  if (!authHeader.startsWith('Bearer ')) {
-    console.log('❌ Authorization header must use Bearer token format');
-    console.log('   Expected format: Bearer <token>');
-    console.log('   Received:', authHeader);
+  const token = authHeader.slice(7); // Remove 'Bearer ' prefix
+  const serverToken = Deno.env.get('SERVER_TOKEN');
+
+  if (!serverToken) {
+    console.error('SERVER_TOKEN environment variable is not set');
     return false;
   }
 
-  // Extract the token from "Bearer <token>"
-  const token = authHeader.substring(7); // Remove "Bearer " prefix
+  return token === serverToken;
+}
 
-  // Validate against the expected server token
-  if (token !== SERVER_TOKEN) {
-    console.log('❌ Invalid bearer token provided');
-    console.log('   Expected token:', SERVER_TOKEN);
-    console.log('   Received token:', token);
-    return false;
-  }
-
-  console.log('✅ Bearer token authentication successful');
-  return true;
+// Get all available tools (use static tools from github.ts)
+function getAllAvailableTools(): any[] {
+  return tools;
 }
 
 // Handle MCP requests
-async function handleMCPRequest(request: MCPRequest): Promise<MCPResponse> {
+async function handleMCPRequest(
+  request: MCPRequest,
+  req: Request
+): Promise<MCPResponse> {
   console.log('Handling MCP request:', request.method);
 
   switch (request.method) {
@@ -94,58 +63,60 @@ async function handleMCPRequest(request: MCPRequest): Promise<MCPResponse> {
             resources: {},
           },
           serverInfo: {
-            name: 'mcp-stream-server',
+            name: 'temperature-mcp',
             version: '1.0.0',
+            description:
+              'MCP server for getting temperature information for countries',
           },
         },
       };
 
-    case 'tools/list':
+    case 'tools/list': {
+      const allTools = getAllAvailableTools();
       return {
         jsonrpc: '2.0',
         id: request.id,
         result: {
-          tools: tools,
+          tools: allTools,
         },
       };
+    }
 
     case 'tools/call': {
       const toolName = request.params?.name;
       const toolArgs = request.params?.arguments;
 
-      // Check if tool exists and execute it
+      // Check if the tool exists in our toolExecutors
       const executor = toolExecutors[toolName];
-      if (executor) {
-        try {
-          const result = await executor(toolArgs);
-          return {
-            jsonrpc: '2.0',
-            id: request.id,
-            result: result,
-          };
-        } catch (error) {
-          return {
-            jsonrpc: '2.0',
-            id: request.id,
-            error: {
-              code: -32602,
-              message:
-                error instanceof Error
-                  ? error.message
-                  : 'Tool execution failed',
-            },
-          };
-        }
+      if (!executor) {
+        return {
+          jsonrpc: '2.0',
+          id: request.id,
+          error: {
+            code: -32601,
+            message: `Unknown tool: ${toolName}`,
+          },
+        };
       }
 
-      return {
-        jsonrpc: '2.0',
-        id: request.id,
-        error: {
-          code: -32601,
-          message: `Unknown tool: ${toolName}`,
-        },
-      };
+      try {
+        const result = await executor(toolArgs || {});
+        return {
+          jsonrpc: '2.0',
+          id: request.id,
+          result: result,
+        };
+      } catch (error) {
+        return {
+          jsonrpc: '2.0',
+          id: request.id,
+          error: {
+            code: -32602,
+            message:
+              error instanceof Error ? error.message : 'Tool execution failed',
+          },
+        };
+      }
     }
 
     case 'resources/list':
@@ -209,7 +180,7 @@ async function handleMCPRequest(request: MCPRequest): Promise<MCPResponse> {
 // Start the HTTP server
 Deno.serve(
   {
-    port: Number(Deno.env.get('PORT')),
+    port: Number(Deno.env.get('PORT')) || 3008,
     hostname: '0.0.0.0',
   },
   async (req: Request) => {
@@ -293,7 +264,7 @@ Deno.serve(
         console.log('Request body:', body);
 
         const mcpRequest: MCPRequest = JSON.parse(body);
-        const mcpResponse = await handleMCPRequest(mcpRequest);
+        const mcpResponse = await handleMCPRequest(mcpRequest, req);
 
         return new Response(JSON.stringify(mcpResponse), {
           status: 200,
@@ -335,10 +306,17 @@ Deno.serve(
   }
 );
 
-console.log('🚀 MCP Server starting on http://localhost:3008/mcp');
-console.log('🔐 Server token loaded from SERVER_TOKEN environment variable');
+// Log server startup information
+console.log('🚀 Temperature MCP Server starting...');
+console.log('   Available tools:');
+tools.forEach((tool) => {
+  console.log(`   - ${tool.name}: ${tool.description}`);
+});
+console.log('   Required environment variables:');
+console.log('   - SERVER_TOKEN: Bearer token for MCP server authentication');
+console.log(`   - PORT: Server port (default: 3008)`);
 console.log(
-  '📝 Use Authorization: Bearer <your-token> header for authentication'
+  `🌐 Server will be available at: http://localhost:${
+    Number(Deno.env.get('PORT')) || 3008
+  }/mcp`
 );
-console.log(`🔧 Available tools: ${tools.map((tool) => tool.name).join(', ')}`);
-console.log('📁 Available resources: test://example');

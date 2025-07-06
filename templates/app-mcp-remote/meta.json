@@ -1,7 +1,7 @@
 {
-  "id": "ui-8Ilv3zuKx",
-  "name": "app-mcp-stream",
-  "type": "template",
+  "id": "ai65lnrZYG-S",
+  "name": "app-mcp-remote",
+  "type": "app",
   "secrets": {
     "base": "base"
   },
@@ -20,21 +20,18 @@
     }
   },
   "terraform": {
-    "default": {
+    "run": {
       "path": "infra",
       "global": false,
       "containers": ["default"]
     }
   },
   "mcp": {
-    "from_mcp_stream": {
-      "url": "http://localhost:3008/mcp",
+    "get_temperature": {
+      "url": "${SERVER_URL}/mcp",
       "headers": {
         "Authorization": "Bearer ${SERVER_TOKEN}"
       }
     }
-  },
-  "template": {
-    "init": ["run vault kv export --all", "run meta change id"]
   }
 }
