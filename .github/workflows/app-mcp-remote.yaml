@@ -1,4 +1,4 @@
-name: app-mcp-stream
+name: app-mcp-remote
 on:
   workflow_dispatch:
 env:
@@ -7,11 +7,11 @@ env:
   VAULT_ROOT_TOKEN: ${{ secrets.VAULT_ROOT_TOKEN }}
   VAULT_ADDR: ${{ secrets.VAULT_ADDR}}
 jobs:
-  app-mcp-stream:
+  app-mcp-remote:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{env.SRC}}/templates/app-mcp-stream
+        working-directory: ${{env.SRC}}/templates/app-mcp-remote
     steps:
       - name: run git safe.directory
         if: ${{ github.event.inputs.LOCAL == 'true' }}
@@ -46,6 +46,6 @@ jobs:
       - name: 'set directory secrets'
         uses: ghostmind-dev/play/actions/secrets@main
         with:
-          dir: ${{ github.workspace }}/templates/app-mcp-stream
+          dir: ${{ github.workspace }}/templates/app-mcp-remote
       - name: 'deploy app'
         run: run custom init --all
