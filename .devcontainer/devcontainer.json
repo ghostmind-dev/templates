@@ -9,6 +9,7 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/ghostmind-dev/features/extensions:latest": {},
     "ghcr.io/ghostmind-dev/features/themes:latest": {},
+    "ghcr.io/ghostmind-dev/features/mounts:latest": {},
     "ghcr.io/ghostmind-dev/features/settings:1.0.5": {},
     "ghcr.io/ghostmind-dev/features/init:latest": {
       "resetLive": true
@@ -23,17 +24,11 @@
     "SRC": "${containerWorkspaceFolder}",
     "LOCALHOST_SRC": "${env:HOME}${env:USERPROFILE}/projects/container/templates",
     "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
-    "VAULT_ROOT_TOKEN": "${localEnv:VAULT_ROOT_TOKEN}",
+    "VAULT_TOKEN": "${localEnv:VAULT_TOKEN}",
     "VAULT_ADDR": "${localEnv:VAULT_ADDR}"
   },
   "containerEnv": {},
-  "mounts": [
-    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
-    "source=ghostmind-templates-history,target=/commandhistory,type=volume",
-    "source=${env:HOME}${env:USERPROFILE}/projects/mcp,target=/Users/francoisseguin/projects/mcp,type=bind",
-    "source=${env:HOME}${env:USERPROFILE}/.cursor/mcp.json,target=/home/vscode/.cursor/mcp.json,type=bind",
-    "source=${env:HOME}${env:USERPROFILE}/projects/container/mcps,target=/Users/francoisseguin/projects/container/mcps,type=bind"
-  ],
+  "mounts": [],
   "runArgs": [
     "--cap-add=CAP_IPC_LOCK",
     "--cap-add=NET_ADMIN",
