@@ -1,11 +1,9 @@
 {
   "files.exclude": {
-    "**/dev": false,
-    "**/refs": false
+    "**/dev": true,
+    "**/refs": true
   },
-  "deno.disablePaths": [
-    "/workspace/templates/app-next-auth/app"
-  ],
+  "deno.disablePaths": ["/workspace/templates/app-next-auth/app"],
   "material-icon-theme.folders.associations": {
     "cloudflared": "contract",
     "app-hasura-base": "contract",

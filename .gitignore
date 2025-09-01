@@ -100,3 +100,5 @@ __pycache__
 /refs
 
 **/mcp.json
+
+**/service-account-key.json
