@@ -27,7 +27,7 @@
     }
   },
   "mcp": {
-    "get_temperature": {
+    "app-mcp-remote": {
       "url": "${SERVER_URL}/mcp",
       "headers": {
         "Authorization": "Bearer ${SERVER_TOKEN}"

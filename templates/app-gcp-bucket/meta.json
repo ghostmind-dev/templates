@@ -1,0 +1,14 @@
+{
+  "id": "eW71v4nz6jNj",
+  "name": "app-gcp-bucket",
+  "type": "app",
+  "secrets": {
+    "base": "base"
+  },
+  "terraform": {
+    "core": {
+      "path": "infra",
+      "global": false
+    }
+  }
+}
